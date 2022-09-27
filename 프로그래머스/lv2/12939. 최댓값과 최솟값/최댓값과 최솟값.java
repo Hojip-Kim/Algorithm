@@ -5,17 +5,21 @@ class Solution {
     public String solution(String s) {
         String answer = "";
 
-        String[] arr = s.split(" ");
+        ArrayList arr = new ArrayList();
 
-        ArrayList<Integer> arr2 = new ArrayList();
-
-        for (int i = 0; i < arr.length; i++) {
-            arr2.add(Integer.parseInt(arr[i]));
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == 32){
+                continue;
+            }else {
+                arr.add(Integer.parseInt(String.valueOf(s.charAt(i))));
+            }
         }
-        Collections.sort(arr2);
 
-        answer = String.valueOf(arr2.get(0)) + " " + String.valueOf(arr2.get(arr2.size()-1));
+        Collections.sort(arr);
 
+        answer = String.valueOf(arr.get(0)) + " " +String.valueOf(arr.get(arr.size()-1));
+
+        
         return answer;
     }
 }
