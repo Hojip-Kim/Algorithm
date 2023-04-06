@@ -6,7 +6,7 @@ class Solution {
             for (int j = i; j < p.length()+i; j++) {
                 tmp += t.charAt(j);
             }
-            if(Long.valueOf(p) >= Long.valueOf(tmp)){
+            if(Long.parseLong(p) >= Long.parseLong(tmp)){
                 answer++;
             }
         }
