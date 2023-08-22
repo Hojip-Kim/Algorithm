@@ -1,3 +1,4 @@
+
 import sys
 from collections import deque
 
@@ -20,10 +21,13 @@ cnt = 0
 
 def BFS(start) :
     global cnt
-    q = deque([start])
+    
+    visit = [False] * (givenNum + 1)
+    
     if isZero[start] == '0' :
         return
     else :
+        q = deque([start])
         visit[start] = True
         while q :
             tmp = q.popleft()
@@ -36,9 +40,9 @@ def BFS(start) :
                         q.append(i)
             
 
-
-
 for i in range(1, givenNum+1) :
-    visit = [False] * (givenNum + 1)
-    BFS(i)
+    if isZero[i] == '1' :
+        BFS(i)
+        
 print(cnt)
+
