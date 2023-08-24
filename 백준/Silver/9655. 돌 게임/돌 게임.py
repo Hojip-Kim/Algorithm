@@ -4,9 +4,9 @@ givenNum = int(sys.stdin.readline())
 
 if givenNum <= 2 :
     if givenNum == 1 :
-        print('SK')
+        sys.stdout.write('SK')
     else :
-        print('CY')
+        sys.stdout.write('CY')
 else :
     boolList = [False] * (givenNum+1)
     boolList[1] = True
@@ -19,6 +19,6 @@ else :
             boolList[i]=True
 
     if boolList[givenNum] :
-        print('SK')
+        sys.stdout.write('SK')
     else :
-        print('CY')
+        sys.stdout.write('CY')
