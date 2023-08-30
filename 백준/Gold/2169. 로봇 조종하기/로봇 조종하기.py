@@ -13,11 +13,11 @@ for i in range(1, N) :
     startLeft = [board[i][j]+board[i-1][j] for j in range(M)]
     startRight = [board[i][j]+board[i-1][j] for j in range(M)]
     
-    # →
+    # 오른쪽으로 이동
     for j in range(1, M) : 
         startLeft[j] = max(startLeft[j], startLeft[j-1]+board[i][j]) 
     
-    # ←
+    # 왼쪽으로 이동
     for j in range(M-2, -1, -1) : 
         startRight[j] = max(startRight[j], startRight[j+1]+board[i][j])
     
