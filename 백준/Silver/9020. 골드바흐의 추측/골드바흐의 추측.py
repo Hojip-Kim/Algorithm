@@ -1,25 +1,31 @@
 import sys
 import math
 
-def is_prime(num: int) :
-    
-    for i in range(2, int(math.sqrt(num))+1) :
-        if num%i == 0 :
-            return False
-    return True
-
-result = list()
-
 A = int(sys.stdin.readline())
 
-for _ in range(A) :
-    input = int(sys.stdin.readline())
-    a, b = int(input/2), int(input/2)
+tmpList = []
+for i in range(A) :
+    tmpList.append(int(sys.stdin.readline()))
+
+
+def isPrime(tmpNumber) :
+    if tmpNumber == 1 :
+        return False
+    else :
+        tmpNum = 0
+        for i in range(2, int(math.sqrt(tmpNumber))+1) :
+            if tmpNumber%(i) == 0 :
+                return False
+                break
+        return True
+
+for i in tmpList :
+    a, b = int(i/2), int(i/2)
+
     while True :
-        if is_prime(a) and is_prime(b) and a+b == input :
-            result.append([a, b])
-            break
-        a -= 1
-        b += 1
-for a, b in result :
-    print(a, b)
+        if isPrime(a) and isPrime(b) and a+b == i :
+            print(a, b)
+            break;
+        else :
+            a -= 1
+            b += 1
