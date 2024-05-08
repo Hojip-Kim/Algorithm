@@ -1,44 +1,46 @@
 import sys
 from collections import deque
+
 N, M, V = map(int,sys.stdin.readline().split())
 
-givenGraph = [[] for _ in range(N+1)]
+_graph = [[]for _ in range(N+1)]
+_visited = [False] * (N+1)
+_visited2 = [False] * (N+1)
 
 for i in range(M) :
     A, B = map(int,sys.stdin.readline().split())
-    givenGraph[A].append(B)
-    givenGraph[B].append(A)
+    _graph[A].append(B)
+    _graph[B].append(A)
 
 
-def DFS(start) :
-    visit[start] = True
-    print(start, end=" ")
+for i in range(len(_graph)) :
+    _graph[i] = sorted(_graph[i])
+
+answer = []
+answer2 = []
+
+def dfs(x) :
+    _visited[x] = True
+    answer.append(x)
+    print(x, end=' ')
     
-    for i in givenGraph[start] :
-        if visit[i] == False :
-            DFS(i)
+    for i in _graph[x] :
+        if _visited[i] == False :
+            dfs(i)
 
-def BFS(start) :
-    queue = deque([start])
-    visit2[start] = True
-    
+def bfs(x) :
+    queue = deque([x])
+    _visited2[x] = True
     while queue :
-        start = queue.popleft()
-        print(start, end=" ")
-        for i in givenGraph[start] :
-            if visit2[i] == False :
+        x = queue.popleft()
+        print(x, end=' ')
+        answer2.append(x)
+        for i in _graph[x] :
+            if _visited2[i] == False :
                 queue.append(i)
-                visit2[i] = True
-
-
-for i in givenGraph :
-    i.sort()
+                _visited2[i] = True
     
-visit = [False] * (N+1)
-DFS(V)
-print()
 
-visit2 = [False] * (N+1)
-BFS(V)
+dfs(V)
 print()
-
+bfs(V)
