@@ -25,7 +25,7 @@ class Node {
     }
 }
 
-public class Main {
+class Main {
 
     public static int[][] directions = new int[][]{{0, 0, 1}, {0, 0, -1}, {0, 1, 0}, {0, -1, 0}, {1, 0, 0}, {-1, 0, 0}};
     public static int[][][] visited;
@@ -55,42 +55,35 @@ public class Main {
             building = new String[L][R][C];
             visited = new int[L][R][C];
 
-            Node startNode = null;
+            Node node = null;
 
             for (int i = 0; i < L; i++) {
                 for (int j = 0; j < R; j++) {
                     String line = br.readLine();
                     for (int k = 0; k < C; k++) {
                         building[i][j][k] = String.valueOf(line.charAt(k));
-                        if (building[i][j][k].equals("S")) {
-                            startNode = new Node(k, j, i);
+                        if(building[i][j][k].equals("S")){
+                            node = new Node(k, j, i);
                         }
                     }
                 }
-                br.readLine(); // 빈 줄 건너뛰기
+                br.readLine();
             }
-
-            if (startNode != null) {
-                BFS(startNode, bw);
-            } else {
-                bw.write("Trapped!\n");
-            }
+             if(node != null) {
+                 BFS(node, bw);
+             };
         }
         bw.flush();
     }
 
     public static void BFS(Node node, BufferedWriter bw) throws IOException {
         deq.clear();
-        for (int[][] layer : visited) {
-            for (int[] row : layer) {
-                Arrays.fill(row, 0);
-            }
-        }
 
         deq.offer(node);
+
         visited[node.getZ()][node.getY()][node.getX()] = 1;
 
-        while (!deq.isEmpty()) {
+        while(!deq.isEmpty()){
             Node cur = deq.poll();
             int dx = cur.getX();
             int dy = cur.getY();
@@ -101,12 +94,12 @@ public class Main {
                 int ny = dy + directions[i][1];
                 int nz = dz + directions[i][2];
 
-                if (0 <= nx && nx < C && 0 <= ny && ny < R && 0 <= nz && nz < L) {
+                if (0 <= nx && nx < C && 0 <= ny && ny < R && 0 <= nz && nz < L){
                     if ((building[nz][ny][nx].equals(".") || building[nz][ny][nx].equals("E")) && visited[nz][ny][nx] == 0) {
                         visited[nz][ny][nx] = visited[dz][dy][dx] + 1;
                         deq.offer(new Node(nx, ny, nz));
-                        if (building[nz][ny][nx].equals("E")) {
-                            bw.write("Escaped in " + (visited[nz][ny][nx] - 1) + " minute(s).\n");
+                        if(building[nz][ny][nx].equals("E")) {
+                            bw.write("Escaped in " + (visited[nz][ny][nx]-1) + " minute(s).\n");
                             return;
                         }
                     }
@@ -115,4 +108,5 @@ public class Main {
         }
         bw.write("Trapped!\n");
     }
+
 }
